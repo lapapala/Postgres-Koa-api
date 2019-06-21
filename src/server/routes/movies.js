@@ -4,6 +4,13 @@ const queries = require('../db/queries/movies');
 const router = new Router();
 const BASE_URL = `/api/v1/movies`;
 
+function deleteMovie(id) {
+  return knex('movies')
+  .del()
+  .where({ id: parseInt(id) })
+  .returning('*');
+}
+
 
 router.get(BASE_URL, async (ctx) => {
     try {
@@ -111,6 +118,5 @@ router.get(BASE_URL, async (ctx) => {
       };
     }
   })
-
   
   module.exports = router;

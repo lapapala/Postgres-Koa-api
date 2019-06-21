@@ -20,9 +20,7 @@ describe('routes : movies', () => {
     return knex.migrate.rollback();
   });
 
-});
-
-describe('GET /api/v1/movies', () => {
+  describe('GET /api/v1/movies', () => {
     it('should return all movies', (done) => {
       chai.request(server)
       .get('/api/v1/movies')
@@ -120,7 +118,6 @@ describe('POST /api/v1/movies', () => {
         });
       });
   });
-
   describe('DELETE /api/v1/movies/:id', () => {
     it('should return the movie that was deleted', (done) => {
       knex('movies')
@@ -175,4 +172,6 @@ describe('POST /api/v1/movies', () => {
     });
   });
   
-  
+
+});
+
