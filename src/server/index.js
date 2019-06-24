@@ -2,7 +2,7 @@ const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const session = require('koa-session');
 const passport = require('koa-passport');
-const RedisStore = require('koa-redis');
+const store = require('./session');
 
 
 const indexRoutes = require('./routes/index');
@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 1337;
 
 // sessions
 app.keys = ['super-secret-key'];
-app.use(session(app));
+app.use(session({ store }, app));
 
 // body parser
 app.use(bodyParser());
@@ -31,9 +31,7 @@ app.use(indexRoutes.routes());
 app.use(movieRoutes.routes());
 app.use(authRoutes.routes());
 
-// app.use(session({
-//   store: new RedisStore()
-// }, app));
+
 
 // server
 const server = app.listen(PORT, () => {
